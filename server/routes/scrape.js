@@ -1,7 +1,7 @@
-const express = require("express");
-const router = express.Router();
-const puppeteer = require("puppeteer-core");
-const NewsArticle = require("../models/news_article"); // Import the Mongoose model
+const express = require("express"); // Import the Express module
+const router = express.Router(); // Create a router instance
+const puppeteer = require("puppeteer-core"); // Import Puppeteer for web scraping
+const NewsArticle = require("../models/news_article"); // Import the Mongoose model for News Article
 
 // Route to trigger scraping and database insertion
 router.get("/", async (req, res) => {
@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
 
     // Open a new page
     const page = await browser.newPage();
-    page.setDefaultNavigationTimeout(2 * 60 * 1000);
+    page.setDefaultNavigationTimeout(2 * 60 * 1000); // Set timeout for navigation
 
     // Array to store scraped articles
     const articles = [];
@@ -30,18 +30,8 @@ router.get("/", async (req, res) => {
     // View scraped articles
     console.log("All Articles:", articles);
 
-    // Insert articles into the database
-    await NewsArticle.insertMany(
-      articles.map((article) => ({
-        title: article.headline,
-        content: article.description,
-        source: article.source,
-        time: new Date().toISOString(), // Ensure each article has a unique timestamp
-        summary: article.summary,
-        keywords: article.keywords,
-        topics: article.topics,
-      }))
-    );
+    // Insert articles into the database, preventing duplicates based on link
+    await processAndInsertArticles(articles);
 
     // Send response
     res
@@ -85,6 +75,8 @@ async function extractArticles(page, selector, articles) {
       const topics = null;
 
       // Assign the current time to each article
+      // THIS IS NOT WORKING AS INTENDED
+      // WANT UNIQUE TIME FOR EACH ARTICLE
       const time = new Date().toISOString();
 
       return { headline, link, description, time, summary, keywords, topics };
@@ -106,4 +98,21 @@ async function extractArticles(page, selector, articles) {
   });
 }
 
-module.exports = router;
+// Function to process and insert articles into the database, preventing duplicates based on link
+async function processAndInsertArticles(articles) {
+  for (const article of articles) {
+    try {
+      // Attempt to find a document with the provided link
+      const existingArticle = await NewsArticle.findOneAndUpdate(
+        { link: article.link },
+        { $setOnInsert: article }, // Set the article if it doesn't exist
+        { upsert: true, new: true } // Upsert: Insert new if not found, update if found
+      );
+      console.log("Processed article:", existingArticle);
+    } catch (error) {
+      console.error("Error processing and inserting article:", error);
+    }
+  }
+}
+
+module.exports = router; // Export the router
