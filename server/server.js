@@ -1,37 +1,42 @@
 // Import required modules
-const express = require("express");
-const mongoose = require("mongoose");
-const cron = require("node-cron");
-const fetch = require("node-fetch"); // Import the fetch module to make HTTP requests
-const scrapeRouter = require("./routes/scrape"); // Import the scraping route
-const articleRouter = require("./routes/articleroute"); // Import the route file
+const express = require("express"); // Express framework
+const mongoose = require("mongoose"); // ODM library
+const cron = require("node-cron"); // Task scheduling
+const fetch = require("node-fetch"); // HTTP requests
+const scrapeRouter = require("./routes/scrape"); // Web news scraping route
+const cors = require("cors");
+// const articleRouter = require("./routes/articleroute"); // Import the route file
+const articleRoutes = require("./routes/article_routes");
 
-// Initialize Express app
+// Initialize Express app instance
 const app = express();
 
-// Connect to MongoDB
+// Enable CORS for all routes
+app.use(cors());
+
+// Connect to MongoDB database
 mongoose
   .connect("mongodb://localhost:27017/my_database", {}) // Connect to MongoDB at the specified URI
-  .then(() => console.log("MongoDB connected")) // Log a success message if connection is established
-  .catch((err) => console.error("MongoDB connection error:", err)); // Log an error message if connection fails
+  .then(() => console.log("MongoDB connected")) // Log success message
+  .catch((err) => console.error("MongoDB connection error:", err)); // Log error message
 
 // Define routes
 app.use("/scrape", scrapeRouter); // Use the scraping route at '/scrape'
 
 // Schedule scraping to run every 5 minutes
-cron.schedule("* * * * *", async () => {
+cron.schedule("*/5 * * * *", async () => {
   // Schedule a task to run every 5 minutes
   console.log("Running scraper..."); // Log a message indicating that the scraper is running
   try {
-    // Call the scraping route programmatically
-    await fetch("http://localhost:5000/scrape", { method: "GET" }); // Make a GET request to the scraping route
+    // Call the scraping route
+    await fetch("http://localhost:5000/scrape", { method: "GET" }); // Make GET request to the scraping route
   } catch (error) {
-    console.error("Error running scraper:", error); // Log an error message if the scraping request fails
+    console.error("Error running scraper:", error); // Log error message if the scraping request fails
   }
 });
 
-// // Mount the article route
-// app.use("/api", articleRouter); // Mount the route at '/api'
+// Mount the article route
+app.use("/api", articleRoutes);
 
 // // Define a route to make a GET request to fetch articles
 // app.get("/test/articles", async (req, res) => {

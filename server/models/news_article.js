@@ -1,3 +1,4 @@
+// Mongo Schema
 const mongoose = require("mongoose");
 
 const newsArticleSchema = new mongoose.Schema({

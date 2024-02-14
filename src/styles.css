@@ -1,0 +1,211 @@
+/* styles.css */
+.App {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center; /* Center align the heading text */
+}
+
+/* Center align the footer text */
+.footer {
+  text-align: center;
+}
+.article-list {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(200px, 1fr)
+  ); /* Adjusted column width */
+  grid-gap: 50px;
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+}
+
+/* Adjust column width for smaller screens */
+@media (max-width: 500px) {
+  .article-list {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+}
+
+/* For wider screens, dynamically add columns
+@media (min-width: 501px) {
+  .article-list {
+    grid-template-columns: repeat(auto-fill, minmax(calc(20% - 20px), 1fr));
+  }
+} */
+
+.article {
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: #f9f9f9; /* Light gray background */
+  transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+.article:hover {
+  background-color: #e0e0e0; /* Light gray background on hover */
+}
+
+.article:visited {
+  background-color: #dcdcdc; /* Light gray background for visited links */
+}
+
+.article-link {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+}
+
+.article-link:hover {
+  text-decoration: underline;
+  color: #007bff; /* Blue color on hover */
+}
+
+.article-link:visited {
+  color: #6c757d; /* Dark gray color for visited links */
+}
+
+.article-source {
+  font-size: 14px;
+  color: #666;
+}
+
+.article-link,
+.article-source {
+  display: block; /* Make entire article clickable */
+  transition: color 0.3s ease; /* Smooth transition on hover */
+}
+
+.article-link:hover,
+.article-source:hover {
+  color: #007bff; /* Blue color on hover */
+}
+
+/* Add background color to the page */
+body {
+  background-color: white;
+  margin: 0; /* Remove default margin */
+  display: flex; /* Use flexbox */
+  flex-direction: column; /* Stack children vertically */
+  min-height: 100vh; /* Ensure the body stretches to at least the height of the viewport */
+}
+
+/* Set text color for different sections */
+h1,
+h2,
+h3 {
+  color: black; /* Dark text color for headings */
+}
+
+p {
+  color: darkgreen; /* Medium-dark text color for paragraphs */
+}
+
+/* Add transitions between sections */
+header,
+main,
+footer {
+  transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+/* Define background colors for different sections */
+header {
+  background-color: green; /* White background color for header */
+}
+
+main {
+  background-color: blue; /* White background color for main section */
+  flex-grow: 1; /* Allow main content area to grow to fill available space */
+}
+
+footer {
+  background-color: beige; /* White background color for footer */
+}
+/* New styles for animated grid */
+.animated-grid {
+  margin-top: 20px; /* Add space at the top */
+  margin-bottom: 50px; /* Add space at the bottom */
+  height: auto; /* Let the grid expand as needed */
+  display: grid;
+  gap: 1rem;
+  grid-template-areas:
+    "a  b  c  d  e"
+    "m  🌟 🌟 f  g"
+    "l  k  j  i  h";
+  grid-template-rows: repeat(3, auto); /* Adjusted for the new template */
+  grid-template-columns: repeat(5, 1fr); /* Adjusted for the new template */
+  --stagger-delay: 100ms;
+}
+
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: scale(0.3);
+    filter: hue-rotate(180deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: hue-rotate(0deg);
+  }
+}
+
+.card {
+  /* background-color: rgb(36, 243, 147); */
+  animation: cardEntrance 700ms ease-out;
+  animation-fill-mode: backwards;
+}
+
+.card:nth-child(1) {
+  grid-area: a;
+  animation-delay: calc(1 * var(--stagger-delay));
+}
+.card:nth-child(2) {
+  grid-area: b;
+  animation-delay: calc(2 * var(--stagger-delay));
+}
+.card:nth-child(3) {
+  grid-area: c;
+  animation-delay: calc(3 * var(--stagger-delay));
+}
+.card:nth-child(4) {
+  grid-area: d;
+  animation-delay: calc(4 * var(--stagger-delay));
+}
+.card:nth-child(5) {
+  grid-area: e;
+  animation-delay: calc(5 * var(--stagger-delay));
+}
+.card:nth-child(6) {
+  grid-area: f;
+  animation-delay: calc(6 * var(--stagger-delay));
+}
+.card:nth-child(7) {
+  grid-area: g;
+  animation-delay: calc(7 * var(--stagger-delay));
+}
+.card:nth-child(8) {
+  grid-area: h;
+  animation-delay: calc(8 * var(--stagger-delay));
+}
+.card:nth-child(9) {
+  grid-area: i;
+  animation-delay: calc(9 * var(--stagger-delay));
+}
+.card:nth-child(10) {
+  grid-area: j;
+  animation-delay: calc(10 * var(--stagger-delay));
+}
+.card:nth-child(11) {
+  grid-area: k;
+  animation-delay: calc(11 * var(--stagger-delay));
+}
+.card:nth-child(12) {
+  grid-area: l;
+  animation-delay: calc(12 * var(--stagger-delay));
+}
+.card:last-child {
+  grid-area: 🌟;
+  animation-delay: calc(13 * var(--stagger-delay));
+}
