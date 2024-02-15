@@ -21,39 +21,10 @@ const ArticleList = () => {
     }
   };
 
-  // Split articles into arrays of up to 14 articles each
-  const chunkedArticles = [];
-  for (let i = 0; i < Math.min(articles.length, 14 * 3); i += 14) {
-    // Adjusted loop condition to only iterate up to 3 chunks
-    chunkedArticles.push(articles.slice(i, i + 14));
-  }
-
   return (
-    <div className="animated-grid-container">
-      {" "}
-      {/* Added container for centering */}
-      {chunkedArticles.map((chunk, index) => (
-        <div key={index} className="animated-grid">
-          {chunk.map((article, idx) => (
-            <div
-              key={idx}
-              className={`card${idx === chunk.length - 1 ? " card-wide" : ""}`}
-            >
-              {article.photoLink && ( // Check if photoLink exists
-                <img
-                  src={article.photoLink}
-                  alt="Article"
-                  className="article-image"
-                />
-              )}
-              <Article
-                headline={article.headline}
-                link={article.link}
-                photoLink={article.photoLink} // Pass photoLink to Article component
-              />
-            </div>
-          ))}
-        </div>
+    <div className="article-list">
+      {articles.map((article, index) => (
+        <Article key={index} article={article} />
       ))}
     </div>
   );

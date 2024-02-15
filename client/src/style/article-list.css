@@ -1,0 +1,50 @@
+.article {
+  display: grid; /* Use grid layout */
+  grid-template-rows: auto 1fr auto; /* Three rows: auto height for image, fill remaining space for text, auto height for source */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Ensure images do not overflow */
+}
+
+.article-image {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover; /* Maintain aspect ratio and cover the container */
+}
+
+.article-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 20px;
+  list-style: none;
+  padding: 0;
+}
+
+.article-content {
+  padding: 20px;
+  display: flex; /* Use flexbox for text content */
+  flex-direction: column; /* Arrange text content vertically */
+  justify-content: center; /* Center text vertically */
+}
+
+.article-link {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+  margin-bottom: 10px; /* Add spacing between link and source */
+}
+
+.article-link:hover {
+  text-decoration: underline;
+  color: #007bff;
+}
+
+.article-link:visited {
+  color: #6c757d;
+}
+
+.article-source {
+  font-size: 14px;
+  color: #666;
+}

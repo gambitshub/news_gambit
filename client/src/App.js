@@ -1,31 +1,22 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
 import Header from "./components/header";
 import Footer from "./components/footer";
-import ArticleList from "./components/article_list";
 import AnimatedGridSection from "./components/animated_grid_section";
-import "./styles.css";
+import "./style/styles.css";
 
 function App() {
   return (
     <div className="App">
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
       <Header />
+      {/* Placeholder for content between Header and AnimatedGridSection */}
+      <div className="content-placeholder">
+        {/* Your additional content goes here */}
+      </div>
       <AnimatedGridSection />
+      {/* Placeholder for content after AnimatedGridSection */}
+      <div className="content-placeholder">
+        {/* Additional content after AnimatedGridSection */}
+      </div>
       <Footer />
     </div>
   );
