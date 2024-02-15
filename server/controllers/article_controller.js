@@ -11,6 +11,27 @@ async function getAllArticles(req, res) {
   }
 }
 
+// Controller function to get the most recent 50 articles sorted by time
+async function getRecentArticles(req, res) {
+  try {
+    console.log("Fetching recent articles...");
+
+    // Fetch the most recent 50 articles sorted by time in descending order
+    const articles = await Article.find().sort({ time: -1 }).limit(50);
+
+    if (articles.length > 0) {
+      console.log("Recent articles found:", articles);
+    } else {
+      console.log("No recent articles found.");
+    }
+
+    res.status(200).json(articles);
+  } catch (error) {
+    console.error("Error fetching recent articles:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+}
+
 // Controller function to fetch filtered articles
 exports.getFilteredArticles = async (req, res) => {
   try {
@@ -73,6 +94,7 @@ async function deleteArticle(req, res) {
 
 module.exports = {
   getAllArticles,
+  getRecentArticles,
   createArticle,
   updateArticle,
   deleteArticle,

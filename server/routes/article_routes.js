@@ -1,12 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const articleController = require("../controllers/article_controller");
-
-// Import your controller function for fetching articles
+// Import controller function for fetching articles
 const { getAllArticles } = require("../controllers/article_controller");
+const { getRecentArticles } = require("../controllers/article_controller");
 
 // Define the route to fetch all articles
 router.get("/articles", getAllArticles);
+
+// Define the route to fetch all articles
+router.get("/articles_recent", getRecentArticles);
 
 module.exports = router;
 

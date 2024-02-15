@@ -5,8 +5,7 @@ const cron = require("node-cron"); // Task scheduling
 const fetch = require("node-fetch"); // HTTP requests
 const scrapeRouter = require("./routes/scrape"); // Web news scraping route
 const cors = require("cors");
-// const articleRouter = require("./routes/articleroute"); // Import the route file
-const articleRoutes = require("./routes/article_routes");
+const articleRoutes = require("./routes/article_routes"); // Import the route file
 
 // Initialize Express app instance
 const app = express();
@@ -37,24 +36,6 @@ cron.schedule("*/5 * * * *", async () => {
 
 // Mount the article route
 app.use("/api", articleRoutes);
-
-// // Define a route to make a GET request to fetch articles
-// app.get("/test/articles", async (req, res) => {
-//   // Define a route for handling GET requests to '/test/articles'
-//   try {
-//     // Make a GET request to fetch articles from the article route
-//     const response = await fetch(
-//       "http://localhost:5000/api/articles/articles",
-//       { method: "GET" }
-//     );
-//     const data = await response.json(); // Parse the JSON response
-//     console.log("Articles:", data); // Log the fetched articles to the console
-//     res.status(200).json(data); // Send the fetched articles as JSON response
-//   } catch (error) {
-//     console.error("Error fetching articles:", error); // Log an error message if fetching articles fails
-//     res.status(500).json({ error: "Internal server error" }); // Send an error response
-//   }
-// });
 
 // Start the server
 const PORT = process.env.PORT || 5000; // Set the port number for the server

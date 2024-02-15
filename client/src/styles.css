@@ -21,12 +21,12 @@
   padding: 0; /* Remove default padding */
 }
 
-/* Adjust column width for smaller screens */
+/* Adjust column width for smaller screens
 @media (max-width: 500px) {
   .article-list {
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   }
-}
+} */
 
 /* For wider screens, dynamically add columns
 @media (min-width: 501px) {
@@ -122,6 +122,13 @@ main {
 footer {
   background-color: beige; /* White background color for footer */
 }
+
+.article-image {
+  width: 100%;
+  height: auto;
+  max-height: 200px; /* Adjust max-height as needed */
+}
+
 /* New styles for animated grid */
 .animated-grid {
   margin-top: 20px; /* Add space at the top */
@@ -204,6 +211,10 @@ footer {
 .card:nth-child(12) {
   grid-area: l;
   animation-delay: calc(12 * var(--stagger-delay));
+}
+.card:nth-child(13) {
+  grid-area: m;
+  animation-delay: calc(13 * var(--stagger-delay));
 }
 .card:last-child {
   grid-area: 🌟;

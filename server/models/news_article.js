@@ -1,4 +1,4 @@
-// Mongo Schema
+// Mongo Database Schema
 const mongoose = require("mongoose");
 
 const newsArticleSchema = new mongoose.Schema({
@@ -9,6 +9,7 @@ const newsArticleSchema = new mongoose.Schema({
   summary: String, // String field for storing the summary
   keywords: [String], // Array of strings for storing keywords
   topics: [String], // Array of strings for storing topics
+  photoLink: String, // New field for storing the photo link
 });
 
 module.exports = mongoose.model("NewsArticle", newsArticleSchema);

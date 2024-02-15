@@ -1,39 +1,28 @@
 {
-  "name": "server",
+  "name": "news_app",
   "version": "1.0.0",
-  "description": "",
+  "description": "News aggregator web app",
   "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
   "scripts": {
     "start": "concurrently \"npm run start-server\" \"npm run start-client\"",
-    "start-client": "react-scripts start",
     "start-server": "node server/server.js",
+    "start-client": "cd client && npm start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
-    "dotenv": "^16.4.3",
     "express": "^4.18.2",
-    "mongodb": "^6.3.0",
     "mongoose": "^8.1.2",
     "node-cron": "^3.0.3",
+    "node-fetch": "^2.7.0",
     "puppeteer-core": "^22.0.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "^5.0.1"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
