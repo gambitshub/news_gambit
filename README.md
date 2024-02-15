@@ -16,9 +16,8 @@ It offers a visually appealing interface that allows users to browse through art
 
 ## Upcoming Features
 * AI Integration: To generate article summary
-* Search Functionality: Allow users to search for specific articles or topics of interest.
-* Filtering Options: Implement filtering options to enable users to refine their search results based on criteria such as date, category, or source.
-* User Authentication: Introduce user authentication features to allow users to create accounts, save articles, and personalize their browsing experience.
+* Search/Filter Functionality: Allow users to search or filter articles by topic/source.
+* User Authentication: Allow users to create accounts, save articles, and personalize/customize their browsing experience (sources/topics).
 * Bookmarking: Enable users to bookmark articles for later reading or reference.
 
 ## Getting Started
